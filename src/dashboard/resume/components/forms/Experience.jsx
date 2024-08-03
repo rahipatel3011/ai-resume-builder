@@ -16,7 +16,7 @@ const FORM_FIELD = {
   city: "",
   state: "",
   startDate: "",
-  endDate: new Date().toISOString().split('T')[0],
+  endDate: new Date().toISOString().split("T")[0],
   workSummary: "",
 };
 
@@ -37,11 +37,10 @@ function Experience() {
     setResumeInfo((prevInfo) => ({ ...prevInfo, experience: experienceList }));
   }, [experienceList, setResumeInfo]);
 
-  function handleChange(index, {name, value}) {
+  function handleChange(index, { name, value }) {
     const copyOfExperienceList = experienceList.slice();
     copyOfExperienceList[index][name] = value;
     setExperienceList(copyOfExperienceList);
-
   }
 
   function onSave(event) {
@@ -54,7 +53,7 @@ function Experience() {
     GlobalApi.UpdateResumeDetail(documentId, data)
       .then((resp) => {
         setIsLoading(false);
-        toast("Details updated");
+        toast("Experience updated");
       })
       .catch((e) => {
         setIsLoading(false);
@@ -68,89 +67,102 @@ function Experience() {
         <h2 className="font-bold text-lg">Professional Experience</h2>
         <p>Add your previous job experience</p>
         <div>
-          {experienceList && experienceList.map((item, index) => (
-            <div key={index}>
-              <div className="grid grid-cols-2 gap-3 border p-3 my-5 rounded-lg">
-                <div>
-                  <label className="text-xs">Position Title</label>
-                  <Input
-                    name="title"
-                    onChange={(event) => handleChange(index, event.target)}
-                    defaultValue={item?.title}
-                  />
-                </div>
-                <div>
-                  <label className="text-xs">Company Name</label>
-                  <Input
-                    name="companyName"
-                    onChange={(event) => handleChange(index, event.target)}
-                    defaultValue={item?.companyName}
-                  />
-                </div>
-                <div>
-                  <label className="text-xs">City</label>
-                  <Input
-                    name="city"
-                    onChange={(event) => handleChange(index, event.target)}
-                    defaultValue={item?.city}
-                  />
-                </div>
-                <div>
-                  <label className="text-xs">State</label>
-                  <Input
-                    name="state"
-                    onChange={(event) => handleChange(index, event.target)}
-                    defaultValue={item?.state}
-                  />
-                </div>
-                <div>
-                  <label className="text-xs">Start Date</label>
-                  <Input
-                    type="date"
-                    name="startDate"
-                    onChange={(event) => handleChange(index, event.target)}
-                    defaultValue={item?.startDate }
-                  />
-                </div>
-                <div>
-                  <label className="text-xs">End Date</label>
-                  <Input
-                    type="date"
-                    name="endDate"
-                    onChange={(event) => handleChange(index, event.target)}
-                    defaultValue={item?.endDate || new Date().toISOString().split('T')[0]}
-                    disabled={item?.currentlyWorking}
-                  />
-                </div>
+          {experienceList &&
+            experienceList.map((item, index) => (
+              <div key={index}>
+                <div className="grid grid-cols-2 gap-3 border p-3 my-5 rounded-lg">
+                  <div>
+                    <label className="text-xs">Position Title*</label>
+                    <Input
+                      required
+                      name="title"
+                      onChange={(event) => handleChange(index, event.target)}
+                      defaultValue={item?.title}
+                    />
+                  </div>
+                  <div>
+                    <label className="text-xs">Company Name*</label>
+                    <Input
+                      required
+                      name="companyName"
+                      onChange={(event) => handleChange(index, event.target)}
+                      defaultValue={item?.companyName}
+                    />
+                  </div>
+                  <div>
+                    <label className="text-xs">City*</label>
+                    <Input
+                      required
+                      name="city"
+                      onChange={(event) => handleChange(index, event.target)}
+                      defaultValue={item?.city}
+                    />
+                  </div>
+                  <div>
+                    <label className="text-xs">State*</label>
+                    <Input
+                      required
+                      name="state"
+                      onChange={(event) => handleChange(index, event.target)}
+                      defaultValue={item?.state}
+                    />
+                  </div>
+                  <div>
+                    <label className="text-xs">Start Date*</label>
+                    <Input
+                      required
+                      type="date"
+                      name="startDate"
+                      onChange={(event) => handleChange(index, event.target)}
+                      defaultValue={item?.startDate}
+                    />
+                  </div>
+                  <div>
+                    <label className="text-xs">End Date</label>
+                    <Input
+                      type="date"
+                      name="endDate"
+                      onChange={(event) => handleChange(index, event.target)}
+                      defaultValue={
+                        item?.endDate || new Date().toISOString().split("T")[0]
+                      }
+                      disabled={item?.currentlyWorking}
+                    />
+                  </div>
 
-                <div className="flex items-center space-x-2">
-                  <Checkbox
-                    onCheckedChange={((checked)=> handleChange(index,{name:'currentlyWorking', value:checked}))}
-                    type="checkbox"
-                    id={`currentlyWorking${index}`}
-                    checked={item?.currentlyWorking}
-                  />
-                  <label
-                    htmlFor={`currentlyWorking${index}`}
-                    className="text-sm font-medium"
-                  >
-                    Present
-                  </label>
-                </div>
+                  <div className="flex items-center space-x-2">
+                    <Checkbox
+                      onCheckedChange={(checked) =>
+                        handleChange(index, {
+                          name: "currentlyWorking",
+                          value: checked,
+                        })
+                      }
+                      type="checkbox"
+                      id={`currentlyWorking${index}`}
+                      checked={item?.currentlyWorking}
+                    />
+                    <label
+                      htmlFor={`currentlyWorking${index}`}
+                      className="text-sm font-medium"
+                    >
+                      Present
+                    </label>
+                  </div>
 
-                <div className="col-span-2">
-                  {/* Work Summery  */}
-                  <RichTextEditor
-                    name="workSummary"
-                    index={index}
-                    onValueChange={handleChange}
-                    resumeInfo={resumeInfo}
-                    onResumeInfoChange={setResumeInfo}
-                  />
+                  <div className="col-span-2">
+                    {/* Work Summery  */}
+                    <RichTextEditor
+                      name="workSummary"
+                      index={index}
+                      onValueChange={handleChange}
+                      resumeInfo={resumeInfo}
+                      onResumeInfoChange={setResumeInfo}
+                    />
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
+            ))}
         </div>
         <div className="flex justify-between mt-5">
           <div className="flex gap-2">

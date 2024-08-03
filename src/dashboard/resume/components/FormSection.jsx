@@ -9,6 +9,7 @@ import Skills from "./forms/Skills";
 import { Link, Navigate, useParams } from "react-router-dom";
 import Theme from "./Theme";
 import Project from "./forms/Project";
+import Optimize from "./forms/Optimize";
 
 function FormSection() {
   const [activeFormIndex, setActiveFormIndex] = useState(1);
@@ -37,7 +38,7 @@ function FormSection() {
               <ArrowLeft />
             </Button>
           )}
-          {activeFormIndex < 6 && (
+          {activeFormIndex < 8 && (
             <Button
               disabled={!enableNext}
               className="flex gap-2"
@@ -63,8 +64,9 @@ function FormSection() {
       {activeFormIndex === 5 && <Project setEnableNext={setEnableNext} />}
       {/* skills */}
       {activeFormIndex === 6 && <Skills setEnableNext={setEnableNext} />}
+      {activeFormIndex === 7 && <Optimize setEnableNext={setEnableNext} />}
 
-      {activeFormIndex === 7 && <Navigate to={`/my-resume/${documentId}/view`} />}
+      {activeFormIndex === 8 && <Navigate to={`/my-resume/${documentId}/view`} />}
     </div>
   );
 }

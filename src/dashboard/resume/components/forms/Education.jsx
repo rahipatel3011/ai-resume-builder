@@ -14,7 +14,7 @@ const EDUCATION_DETAILS = {
   degree: " ",
   major: " ",
   startDate: "",
-  endDate: new Date().toISOString().split('T')[0],
+  endDate: new Date().toISOString().split("T")[0],
   description: "",
 };
 
@@ -45,12 +45,10 @@ function Education() {
       },
     };
 
-    
-
     GlobalApi.UpdateResumeDetail(documentId, data)
       .then((resp) => {
         setIsLoading(false);
-        toast("Details updated");
+        toast("Education updated");
       })
       .catch((e) => {
         setIsLoading(false);
@@ -67,7 +65,7 @@ function Education() {
           <div key={index}>
             <div className="grid grid-cols-2 gap-3 border p-3 my-5 rounded-lg">
               <div className="col-span-2">
-                <label>University Name</label>
+                <label>University/College Name*</label>
                 <Input
                   name="universityName"
                   onChange={(e) => handleChange(e.target, index)}
@@ -76,8 +74,9 @@ function Education() {
               </div>
 
               <div>
-                <label>Degree</label>
+                <label>Degree*</label>
                 <Input
+                  required
                   name="degree"
                   onChange={(e) => handleChange(e.target, index)}
                   defaultValue={item?.degree}
@@ -85,8 +84,9 @@ function Education() {
               </div>
 
               <div>
-                <label>Major</label>
+                <label>Major*</label>
                 <Input
+                  required
                   name="major"
                   onChange={(e) => handleChange(e.target, index)}
                   defaultValue={item?.major}
@@ -94,8 +94,9 @@ function Education() {
               </div>
 
               <div>
-                <label>Start Date</label>
+                <label>Start Date*</label>
                 <Input
+                  required
                   type="date"
                   name="startDate"
                   onChange={(e) => handleChange(e.target, index)}
@@ -110,7 +111,9 @@ function Education() {
                   type="date"
                   name="endDate"
                   onChange={(e) => handleChange(e.target, index)}
-                  defaultValue={item?.endDate || new Date().toISOString().split('T')[0]}
+                  defaultValue={
+                    item?.endDate || new Date().toISOString().split("T")[0]
+                  }
                 />
               </div>
 

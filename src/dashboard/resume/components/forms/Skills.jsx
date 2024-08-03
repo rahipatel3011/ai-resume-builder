@@ -39,7 +39,7 @@ function Skills() {
     GlobalApi.UpdateResumeDetail(documentId, data)
       .then((resp) => {
         setIsLoading(false);
-        toast("Details updated");
+        toast("Skills updated");
       })
       .catch((e) => {
         setIsLoading(false);

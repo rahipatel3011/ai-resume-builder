@@ -6,7 +6,7 @@ import React, { useEffect, useRef, useState } from "react";
 import GlobalApi from "../../../service/GlobalApi";
 import { useParams } from "react-router-dom";
 import { toast } from "sonner";
-import { generateResumePDF } from "@/data/GenerateResumePDF";
+import { generateResumePDF } from "../../data/generateResumePDF";
 function ViewResume() {
   const [resumeInfo, setResumeInfo] = useState();
   const { resumeId } = useParams();

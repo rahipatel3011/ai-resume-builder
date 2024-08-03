@@ -66,20 +66,13 @@ export default {
   ],
   skills: [
     {
-      name: "Angular",
-      rating: 80,
+      skillType: "FrameWorks",
+      skillValues: "React, Angular, Springboot",
     },
     {
-      name: "React",
-      rating: 100,
-    },
-    {
-      name: "MySql",
-      rating: 80,
-    },
-    {
-      name: "React Native",
-      rating: 100,
+      skillType: "Languages",
+      skillValues: "Java, C#, Python",
     },
   ],
+  jobPost:"Very long decription here"
 };

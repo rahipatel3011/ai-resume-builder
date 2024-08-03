@@ -23,6 +23,7 @@ import {
 } from "@/components/ui/alert-dialog";
 import GlobalApi from "../../../service/GlobalApi";
 import { toast } from "sonner";
+import { generateResumePDF } from "../../data/generateResumePDF";
 
 function ResumeCardItem({ resume, refreshData }) {
   const [openAlert, setOpenAlert] = useState(false);
@@ -88,9 +89,7 @@ function ResumeCardItem({ resume, refreshData }) {
               Preview
             </DropdownMenuItem>
             <DropdownMenuItem
-              onClick={() =>
-                navigate("/my-resume/" + resume.documentId + "/view")
-              }
+              onClick={() =>generateResumePDF(resume)}
             >
               Download
             </DropdownMenuItem>
